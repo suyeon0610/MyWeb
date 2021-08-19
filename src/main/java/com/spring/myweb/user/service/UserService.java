@@ -1,5 +1,8 @@
 package com.spring.myweb.user.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +22,26 @@ public class UserService implements IUserService {
 
 	@Override
 	public void join(UserVO vo) {
-		// TODO Auto-generated method stub
-
+		mapper.join(vo);
 	}
 
 	@Override
 	public UserVO login(String id, String pw) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> data = new HashMap<>();
+		data.put("id", id);
+		data.put("pw", pw);
+		
+		return mapper.login(data);
 	}
 
 	@Override
 	public UserVO getInfo(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getInfo(id);
+	}
+	
+	@Override
+	public void modify(UserVO vo) {
+		mapper.modify(vo);
 	}
 
 }

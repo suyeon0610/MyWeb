@@ -132,15 +132,14 @@
 							location.href = "<c:url value='/freeBoard/freeList?pageNum=${p.pageNum}&keyword=${p.keyword}&condition=${p.condition}' />";
 						});
 
-		//수정 버튼 클릭 이벤트
+		//변경 버튼 클릭 이벤트
 		$('#modify-btn')
 				.click(
 						function() {
 							const article = $('#article');
 
-							article
-									.attr('action',
-											'<c:url value="/freeBoard/freeModify?bno=${article.bno}" />')
+							article.attr('action',
+											'<c:url value="/freeBoard/freeModify?bno=${article.bno}&writer=${article.writer}" />')
 							article.attr('method', 'get');
 							article.submit();
 

@@ -17,7 +17,7 @@
 							<tr>
 								<td class="t-title">NAME</td>
 								<td><input id="writer" class="form-control input-sm"
-									name="writer"></td>
+									name="writer" value="${login.userId }" readonly></td>
 							</tr>
 							<tr>
 								<td class="t-title">TITLE</td>

@@ -55,14 +55,20 @@
 								<li class="dropdown"><a class="dropdown-toggle"
 									data-toggle="dropdown" href="#">로그인 <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href="<c:url value='/user/userJoin' />"><span
-												class="glyphicon glyphicon-user"></span>Join</a></li>
-										<li><a href="#"><span
-												class="glyphicon glyphicon-log-in"></span>Login</a></li>
-										<li><a href="#"><span
-												class="glyphicon glyphicon-user"></span>MyPage</a></li>
-										<li><a href="#"><span
-												class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+									<c:choose>
+										<c:when test="${login == null }">
+											<li><a href="<c:url value='/user/userJoin' />"><span
+													class="glyphicon glyphicon-user"></span>Join</a></li>
+											<li><a href="<c:url value='/user/userLogin' />"><span
+													class="glyphicon glyphicon-log-in"></span>Login</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="<c:url value='/user/userMypage' />"><span
+													class="glyphicon glyphicon-user"></span>MyPage</a></li>
+											<li><a href="#"><span
+													class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+										</c:otherwise>
+									</c:choose>
 									</ul></li>
 							</ul>
 

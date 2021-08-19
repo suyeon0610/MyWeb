@@ -2,11 +2,76 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="com.spring.myweb.user.mapper.IUserMapper">
- 
- 	<select id="idCheck" resultType="int">
- 		SELECT COUNT(*) FROM users
- 		WHERE userId = #{userId}
- 	</select>
- </mapper>
+
+<mapper namespace="com.spring.myweb.user.mapper.IUserMapper">
+
+	<!-- VO클래스의 멤버변수가 컬렉션 타입일 경우에는 collection 태그 사용 -->
+	<!-- collection 타입의 변수에 값을 매길 때는 어떤 객체로 포장해서 넣을지를 새로운 ResultMap으로 선언해 줘야 
+		함 -->
+	<resultMap type="com.spring.myweb.command.UserVO"
+		id="MyPageMap">
+		<id property="userId" column="USERID" />
+      <result property="userName" column="USERNAME"/>
+      <result property="userPhone1" column="USERPHONE1"/>
+      <result property="userPhone2" column="USERPHONE2"/>
+      <result property="userEmail1" column="USEREMAIL1"/>
+      <result property="userEmail2" column="USEREMAIL2"/>
+      <result property="addrBasic" column="ADDRBASIC"/>
+      <result property="addrDetail" column="ADDRDETAIL"/>
+      <result property="addrZipNum" column="ADDRZIPNUM"/>
+		<collection property="userBoardList" resultMap="list" />
+	</resultMap>
+
+	<!-- collection에 들어갈 객체가 어떤 식으로 포장될 지를 명시해 주는 resultMap -->
+	<resultMap type="com.spring.myweb.command.FreeBoardVO"
+		id="list">
+		<id property="bno" column="bno" />
+		<result property="title" column="title" />
+		<result property="regdate" column="regdate" />
+		
+	</resultMap>
+
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*) FROM users
+		WHERE userId = #{userId}
+	</select>
+
+	<insert id="join">
+		INSERT INTO users(userId, userPw, userName, userPhone1, userPhone2,
+		userEmail1, userEmail2, addrBasic, addrDetail, addrZipNum)
+		VALUES(#{userId}, #{userPw}, #{userName}, #{userPhone1},
+		#{userPhone2}, #{userEmail1}, #{userEmail2}, #{addrBasic},
+		#{addrDetail}, #{addrZipNum})
+	</insert>
+
+	<select id="login" resultType="com.spring.myweb.command.UserVO">
+		SELECT * FROM users
+		WHERE userId = #{id} AND userPw = #{pw}
+	</select>
+
+	<select id="getInfo" resultMap="MyPageMap">
+		SELECT userId,
+		userName,
+		userPhone1,
+		userPhone2,
+		userEmail1,
+		userEmail2,
+		addrBasic,
+		addrDetail,
+		addrZipNum,
+		f.bno,
+		f.title,
+		f.regdate
+		FROM users u LEFT OUTER JOIN freeboard f
+		ON u.userId = f.writer
+		WHERE
+		u.userId = #{userId}
+		ORDER BY f.bno DESC
+	</select>
+	
+	<update id="modify">
+		UPDATE users 
+		SET userEmail1=#{userEmail1}, userEmail2=#{userEmail2}, userPhone1=#{userPhone1}, userPhone2=#{userPhone2}, addrDetail=#{addrDetail}
+		WHERE userId = #{userId}
+	</update>
+</mapper>
