@@ -57,9 +57,11 @@
 			
 			if($('#title').val() === '') {
 				alert('제목을 입력해 주세요.');
+				document.updateForm.title.focus();
 				return;
 			} else if($('#content').val() === '') {
 				alert('내용을 입력해 주세요.');
+				document.updateForm.content.focus();
 				return;
 			} else {
 				$('#modify-btn').attr('type', 'submit');

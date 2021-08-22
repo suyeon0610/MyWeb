@@ -33,6 +33,10 @@ public class UploadController {
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 			String uploadFolder = "D:\\test\\upload";
 			
+			//파일 업로드 시 파일명이 동일한 파일이 존재할 수도 있고,
+			//사용자가 업로드하는 파일명일 한글인 경우도 있음
+			//한글을 지원하지 않는 환경일 수도 있음 (리눅스)
+			//고유한 랜덤 문자를 통해 DB와 서버에 저장할 파일명을 새로 만들어 줌
 			UUID uuid = UUID.randomUUID();
 			String[] uuids = uuid.toString().split("-");
 			String uniqueName = uuids[0];
@@ -76,4 +80,10 @@ public class UploadController {
 		
 		return "/fileupload/upload_ok2";
 	}
+	
+	@PostMapping("/upload_ok3")
+	public String upload3(@RequestParam("file") List<MultipartFile> list) {
+		return "";
+	}
+	
 }

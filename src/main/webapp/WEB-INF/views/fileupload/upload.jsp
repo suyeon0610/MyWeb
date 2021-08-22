@@ -32,8 +32,11 @@
 	</form>
 	
 	<form action="upload_ok4" method="post" enctype="multipart/form-data">
+		<input type="text" name="list[0].name">
 		 파일선택: <input type="file" name="list[0].file"> <br>
+		 <input type="text" name="list[0].name">
 		 파일선택: <input type="file" name="list[1].file"> <br>
+		 <input type="text" name="list[0].name">
 		 파일선택: <input type="file" name="list[2].file"> <br>
 		 <input type="submit" value="전송">
 	</form>
