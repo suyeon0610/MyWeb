@@ -345,7 +345,7 @@
 				console.log(user_id);
 				console.log(file);
 				//.을 제거한 확장자만 얻어낸 후 그것을 소문자로 변경
-				file.slice(file.indexOf('.') + 1).toLowerCase(); //file이름의 .뒤부터
+				file.slice(file.indexOf('.') + 1).toLowerCase(); //file 확장자
 				if(file !== 'jpg' && file !== 'png' && file!== 'bmp') {
 					alert('이미지파일(jpg, png, bmp)만 등록이 가능합니다.');
 					$('#file').val('');
